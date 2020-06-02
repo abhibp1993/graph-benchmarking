@@ -5,9 +5,12 @@
 #ifndef IGLSYNTH_GRAPH_LEMON_H
 #define IGLSYNTH_GRAPH_LEMON_H
 
+#include <lemon/list_graph.h>
 
-class graph_lemon {
-
+class LemonGraph {
+public:
+    LemonGraph() {}
+    
 };
 
 

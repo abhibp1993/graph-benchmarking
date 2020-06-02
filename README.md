@@ -37,7 +37,56 @@ of size 0, 10, 100, ..., 10^5.
     - Disjunctive product
 
 
-#  TODOs
+# Instructions to Setup Code
+
+## Build Environment 
+It is recommended to use docker for this project. The Dockerfile can be built using 
+```
+$ cd <path>/graph-benchmarking/docker
+$ docker build -t graph-benchmarking .
+```
+
+Check if everything went alright:
+```
+$ docker run -v D:\MyWorld\GitHub-Projects\graph-benchmarking:/home/graph-benchmarking --name graph-benchmarking --rm graph-benchmarking:latest 
+```
+
+This will open the shell within docker. Run the following commands to generate the bindings. 
+```
+$ cd /home/graph-benchmarking/
+$ python3 setup.py develop
+```
+
+The `setup.py` will invoke the cmake to compile and link the C++ code and generate bindings. 
+To use it, run the following command. 
+
+```
+$ python3
+>>> import iglsynthcpp as igl
+>>> igl.hello()
+# should print "0"
+>>> g1 = igl.SnapGraph()
+>>> g2 = igl.LemonGraph()
+```
+
+## Writing Code
+Here are some tips for code organization. 
+
+* All C++ code (`.h, .cpp`) goes into `src` folder. 
+* All Python code goes into `benchmark` folder. 
+
+The `benchmark` folder contains a `main.py` file that runs all the benchmarks. 
+
+
+## Python Binding 
+Python binding is done using `pybind11`. 
+In C++, `igl_bindings.cpp` defines what needs to be bound to python.
+The `main.cpp` will be used to generate C++ executable, which may be executed using `./main` from `build` folder.
+
+Note: Just uncomment the code in `igl_bindings.cpp` to bind a particular function to python. 
+
+
+# TODOs
 
 1. Create an abstract `GraphBase` class that will serve as parent class for all graph class.
     `GraphBase` defines `AddNode, AddEdge, GetInEdges, GetOutEdges` functions. 
@@ -48,7 +97,7 @@ of size 0, 10, 100, ..., 10^5.
 
 4. Bind all functionality to python.
 
-5. Create a `benchmarks.py` file that generates benchmarking results. 
+5. Create a `main.py` file that generates benchmarking results. 
 
 6. Generate graphical outputs (comparison plots, tables). 
 

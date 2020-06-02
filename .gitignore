@@ -106,3 +106,4 @@ fabric.properties
 .idea/*
 .vscode/*
 build/*
+iglsynthcpp.egg-info/*

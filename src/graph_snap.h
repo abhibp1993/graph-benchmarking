@@ -7,8 +7,9 @@
 
 #include <Snap.h>
 
-class graph_snap {
-
+class SnapGraph {
+public:
+    SnapGraph() {}
 };
 
 

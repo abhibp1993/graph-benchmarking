@@ -6,8 +6,21 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(iglcpp, m) {
+PYBIND11_MODULE(iglsynthcpp, m) {
 
     m.def("hello", [](){return 0;});
+    
+    py::class_<SnapGraph>(m, "SnapGraph")
+        .def(py::init<>())
+        // .def("AddNode", &SnapGraph::AddNode)
+        // .def("AddEdge", &SnapGraph::AddEdge)
+        // .def("GetInEdges", &SnapGraph::GetInEdges)
+        ;
 
+    py::class_<LemonGraph>(m, "LemonGraph")
+        .def(py::init<>())
+        // .def("AddNode", &LemonGraph::AddNode)
+        // .def("AddEdge", &LemonGraph::AddEdge)
+        // .def("GetInEdges", &LemonGraph::GetInEdges)
+        ;
 }
