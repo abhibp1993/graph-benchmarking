@@ -106,4 +106,4 @@ Note: Just uncomment the code in `igl_bindings.cpp` to bind a particular functio
 
 # Contributors: 
 1. Abhishek N. Kulkarni (ankulkarni@wpi.edu)
-2. Yaru Gong (email?)
+2. Yaru Gong (ygong5@wpi.edu)

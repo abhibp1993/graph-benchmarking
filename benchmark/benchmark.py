@@ -37,16 +37,16 @@ def experiment2():
 
 if __name__ == '__main__':
 
-    tracemalloc.start()
+
     print("======== Experiment 1 ========")
     for idx in range(len(GRAPH_TYPES)):
         start = time.time()
-        snapshot1 = tracemalloc.take_snapshot()
+        tracemalloc.start()
         experiment1(idx)
         end = time.time()
-        snapshot2 = tracemalloc.take_snapshot()
-        stats = snapshot1.compare_to(snapshot2, 'lineno')
-        tracemalloc.start()
+        current, peak = tracemalloc.get_traced_memory()
+
         print(GRAPH_TYPES[idx])
         print("Spent", end-start, " second.")
-        #print("Memory used: ", stats)
+        print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
+        tracemalloc.stop()

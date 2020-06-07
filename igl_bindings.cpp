@@ -12,7 +12,7 @@ PYBIND11_MODULE(iglsynthcpp, m) {
     
     py::class_<SnapGraph>(m, "SnapGraph")
         .def(py::init<>())
-        // .def("AddNode", &SnapGraph::AddNode)
+        .def("AddNode", &SnapGraph::AddNode)
         // .def("AddEdge", &SnapGraph::AddEdge)
         // .def("GetInEdges", &SnapGraph::GetInEdges)
         ;
