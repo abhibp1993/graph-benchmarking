@@ -107,3 +107,4 @@ fabric.properties
 .vscode/*
 build/*
 iglsynthcpp.egg-info/*
+benchmark/__pycache__/graph_nx.cpython-37.pyc
