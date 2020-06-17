@@ -23,12 +23,24 @@ SAMPLE = [10, 100, 1000, 10000, 100000, 1000000, 10000000]
 
 
 def experiment1(graph, samp):
+    """
+    Experiment 1
+    :param graph: A graph object.
+    :param samp: number of nodes
+    :return: graph with added nodes
+    """
     for i in range(samp):
         graph.add_node(i)
     return graph
 
 
 def experiment2(graph, samp):
+    """
+    Experiment 2
+    :param graph: A graph object.
+    :param samp: number of edges
+    :return: graph with added edges
+    """
     for i in range(samp):
         rand1 = random.randint(0,graph.number_of_nodes()-1)
         rand2 = random.randint(0,graph.number_of_nodes()-1)
@@ -36,6 +48,11 @@ def experiment2(graph, samp):
     return graph
 
 def experiment3(GRAPH):
+    """
+    Experiment 3
+    :param graph: A graph object.
+    :return: two 4*20*7 lists of timing and usage for 4 graph methods, 20 Node_Edge layout, and 7 N.
+    """
     x = 0
     running_time_graph = []
     memory_used_graph = []
@@ -45,7 +62,9 @@ def experiment3(GRAPH):
         N = [0, 1, 10, 100, 1000]
         running_time_NE = []
         memory_used_NE = []
+
         for i in N[1:]:
+
             currentG = experiment1(graph, i)
             for j in N:
                 currentG = experiment2(currentG, j)
@@ -71,8 +90,8 @@ def experiment3(GRAPH):
 
                     print(f"Experiment: {k}: Time={duration} ms, RAM={space} Kb")
 
-            running_time_NE.append(running_time_samp)
-            memory_used_NE.append(memory_used_NE)
+                running_time_NE.append(running_time_samp)
+                memory_used_NE.append(memory_used_NE)
 
         x += 1
 
@@ -85,6 +104,15 @@ def experiment3(GRAPH):
 
 
 def recordData(GRAPH, experimentIdx):
+    """
+    Helper function for Experiment 1 and 2, it record the time and usage
+    :param graph: A graph object.
+    :param experimentIdx: experiment 1 or 2
+    :return: running_time: a 4*7 list for each graph method and N
+             peak_usage: a 4*7 list for each graph method and N
+             Graph: graph after experiment
+    """
+
     running_time = []
     peak_usage = []
     Graph = []
@@ -124,6 +152,12 @@ def recordData(GRAPH, experimentIdx):
     return running_time, peak_usage, Graph
 
 def drawPlot(data, data_name, title):
+    """
+    Helper function to draw plots
+    :param data: a 4*7 list for each graph method and N
+    :param data_name: Time or Memory
+    :param title: plots title
+    """
     #Draw Plots
     i = 0
     for d in data:
@@ -136,35 +170,48 @@ def drawPlot(data, data_name, title):
     plt.close()
 
 
+def transpose(list):
+    """
+    Helper function to transpose a list
+    :param list: A list(4*20*7)
+    :return: list after transpose(20*4*7)
+    """
+    new_list = []
+    for i in range(len(list[0])):
+        row = []
+        for j in list:
+            row.append(j[i])
+        new_list.append(row)
+    return new_list
+
+
 def visualization(running_time, peak_usage, experiment):
+    """
+    visualize the results
+    :param running_time: a list of timing
+    :param peak_usage: a list of memory usage
+    :param experiment: experiment name
+    """
     if not experiment == "Experiment3" :
         drawPlot(running_time, "Time", experiment)
         drawPlot(peak_usage, "Memory", experiment)
     else:
-        print(running_time, peak_usage, experiment)
-        #i = 0
-        #for graph_time in running_time:
-        #    plt.plot(SAMPLE, graph_time[i], label= LIBRARY[i])
-    #Draw Plots
-    #i = 0
-    #for runTime in running_time:
-    #    plt.plot(SAMPLE, runTime, label = LIBRARY[i])
-    #    i+= 1
-    #plt.ylabel('Time')
-    #plt.title(experiment)
-    #plt.legend()
-    #plt.savefig(experiment+ "_time.png")
-    #plt.close()
-
-    #i = 0
-    #for peak in peak_usage:
-    #    plt.plot(SAMPLE, peak, label = LIBRARY[i])
-    #    i+= 1
-    #plt.ylabel('Peak Memory Usage')
-    #plt.title(experiment)
-    #plt.legend()
-    #plt.savefig(experiment + "_peak_usage.png")
-    #plt.close()
+        running_time = transpose(running_time)
+        peak_usage = transpose(peak_usage)
+        #print(len(running_time))
+        #print(running_time)
+        NE_pair = [[1,0],[1,1], [1,10], [1,100], [1,1000],
+                    [10,0],[10,1], [10,10], [10,100], [10,1000],
+                    [100,0],[100,1], [100,10], [100,100], [100,1000],
+                    [1000,0],[1000,1], [1000,10], [1000,100], [1000,1000]]
+        ne = 0
+        for rt_NE in running_time:
+            drawPlot(rt_NE, "Time", experiment+"_[Node, Egde]:"+str(NE_pair[ne]))
+            ne+=1
+        ne = 0
+        for pu_NE in peak_usage:
+            drawPlot(pu_NE, "Memory", experiment+"_[Node, Egde]:"+str(NE_pair[ne]))
+            ne+=1
 
 
 
