@@ -5,10 +5,13 @@ class Graph(igraph.Graph):
         super(Graph, self).__init__()
 
     def add_node(self, id):
-        super(Graph, self).add_vertices(id)
+        super(Graph, self).add_vertex()
 
     def add_edge(self, uid, vid):
-        super(Graph, self).add_vertices(uid)
-        super(Graph, self).add_vertices(vid)
         super(Graph, self).add_edges([(uid,vid)])
 
+    def number_of_nodes(self):
+        return super(Graph, self).vcount()
+
+    def in_edges(self, uid):
+        return super(Graph, self).incident(uid)

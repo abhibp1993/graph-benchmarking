@@ -5,13 +5,18 @@ class Graph(snap.TNGraph):
         super(Graph, self).__init__()
 
     def add_node(self, id):
-        super(Graph, self).AddNode(id)
+        if not super(Graph, self).IsNode(id):
+            super(Graph, self).AddNode(id)
 
     def add_edge(self, uid, vid):
-        if not super(Graph, self).IsNode(uid):
-            super(Graph, self).AddNode(uid)
-        if not super(Graph, self).IsNode(vid):
-            super(Graph, self).AddNode(vid)
+        self.add_node(uid)
+        self.add_node(vid)
         super(Graph, self).AddEdge(uid, vid)
+
+    def number_of_nodes(self):
+        return super(Graph, self).GetNodes()
+
+    def in_edges(self, uid):
+        return super(Graph, self).GetNI(uid).GetInDeg()
 
 
