@@ -22,13 +22,9 @@ GRAPH_TYPES =  [nx.Graph, snap.Graph, igraph.Graph, gt.Graph]
 SAMPLE = [10, 100, 1000, 10000, 100000, 1000000, 10000000]
 
 
-def experiment1(graph, samp):
-    """
-    Experiment 1
-    :param graph: A graph object.
-    :param samp: number of nodes
-    :return: graph with added nodes
-    """
+def experiment1(Graph, samp):
+
+
     for i in range(samp):
         graph.add_node(i)
     return graph
@@ -127,6 +123,7 @@ def recordData(GRAPH, experimentIdx):
             start = time.time()
             tracemalloc.start()
 
+            # object: graph
             if experimentIdx == 1:
                 g = graph()
                 g = experiment1(g, samp)
