@@ -45,7 +45,7 @@ public:
     GraphBase() {}
 
     Node AddNode(std::string name);
-    Edge AddEdge(std::string name);
+    Edge AddEdge(std::string name, std::int SrcNId, std::int TgtNId);
     std::vector<Edge> GetInEdges(std::shared_ptr<Node> u);
     std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u);
 };
