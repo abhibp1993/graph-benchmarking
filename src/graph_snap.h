@@ -19,7 +19,7 @@ public:
         // Note: For benchmarking purposes, we know by design repetition is avoided. 
         if(m_Nodes.find(name) == m_Nodes.end()){
             printf("Node with name %c is already existed.", name);
-            return Null;
+            return NULL;
         }
 
         int nid = m_Graph->AddNode();
@@ -31,7 +31,7 @@ public:
     Edge AddEdge(std::string name, std::int SrcNId, std::int TgtNId) {
         if(m_Edges.find(name) == m_Edges.end()){
             printf("Edge with name %c is already existed.", name);
-            return Null;
+            return NULL;
         }
 
         int eId = m_Graph->AddEdge(SrcNId, TgtNId);
