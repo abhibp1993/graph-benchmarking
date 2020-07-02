@@ -28,14 +28,19 @@ public:
         return n;
     }
 
-    Edge AddEdge(std::string name, std::int SrcNId, std::int TgtNId) {
-        if(m_Edges.find(name) == m_Edges.end()){
-            printf("Edge with name %c is already existed.", name);
+    Edge AddEdge(std::string name, std::int SrcNId, std::int TgtNId) {      // Incorrect. int is just referred as is.
+//  Correct:   Edge AddEdge(std::string name, int SrcNId, int TgtNId) {
+
+        if(m_Edges.find(name) == m_Edges.end()){    // Incorrect. If this clause is true, then it means that edge with this name does NOT exist.
+            printf("Edge with name %c is already existed.", name);  // In C++, we prefer to use std::cout << string-to-print << std::endl;
             return NULL;
         }
 
         int eId = m_Graph->AddEdge(SrcNId, TgtNId);
-        Node srcN = m_Graph->GetNode(SrcNId);
+        Node srcN = m_Graph->GetNode(SrcNId);           // This won't work. You are querying SNAP graph to return a Node object.
+                                                        // Instead, I think you should be querying m_Nodes in SnapGraph data structure for it.
+                                                        // Remember: SnapGraph data structure stores the names, id correspondence.
+                                                        // and SNAP's TNEGraph stores nodes only by their IDs.
         Node tgtN = m_Graph->GetNode(TgtNId);
         Edge edge = Edge(eid, srcN, tgtN);
         m_Edges.insert({name, edge});
@@ -43,7 +48,7 @@ public:
 
     }
 
-
+    // Let's discuss this function after you have implemented AddEdge.
     std::vector<Edge> GetInEdges(std::shared_ptr<Node> u) {
         Node n = u*;
         std::vector<Edge> inEdges;
