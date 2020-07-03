@@ -55,7 +55,7 @@ public:
         int inDeg = n->GetInDeg();
         for(int i  = 0; i < inDeg; i++){
             int eId = m_Graph->GetInEId(i, n);
-            inEdges.push_back(m_Egdes.find(eId));
+            inEdges.push_back(m_Egdes.find(eId).second);
         }
         return inEdges;
     }
@@ -66,7 +66,7 @@ public:
         int outDeg = n->GetOutDeg();
         for(int i  = 0; i < outDeg; i++){
             int eId = m_Graph->GetOutEId(i, n);
-            outEdges.push_back(m_Egdes.find(eId));
+            outEdges.push_back(m_Egdes.find(eId).second);
         }
         return outEdges;
         
