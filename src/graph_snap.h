@@ -30,47 +30,47 @@ public:
         return n;
     }
 
-    Edge AddEdge(std::string name, Node srcN, Node tgtN) {
+    Edge AddEdge(std::string name, std::shared_ptr<Node> srcN, std::shared_ptr<Node> tgtN) {
 
         if(m_Edges.find(name) != m_Edges.end()){
             std::cout << "Edge with name " << name << " is already existed." << std::endl;
             return m_Edges.find(name)->second;
         }
 
-        int eId = m_Graph->AddEdge(srcN.getNId(), tgtN.getNId());
-        std::shared_ptr<Node> src = std::make_shared<Node>(srcN);
-        std::shared_ptr<Node> tgt = std::make_shared<Node>(tgtN);
+        int eId = m_Graph->AddEdge(srcN->getNId(), tgtN->getNId());
+//        std::shared_ptr<Node> src = std::make_shared<Node>(srcN);
+//        std::shared_ptr<Node> tgt = std::make_shared<Node>(tgtN);
 
-        Edge edge = Edge(eId, src, tgt);
+//        Edge edge = Edge(eId, src, tgt);
+        Edge edge = Edge(eId, srcN, tgtN);
         m_Edges.insert({name, edge});
         return edge;
 
     }
 
 
-    // Let's discuss this function after you have implemented AddEdge.
-    std::vector<Edge> GetInEdges(std::shared_ptr<Node> u) {
-        Node n = *u;
-        std::vector<Edge> inEdges;
-        int inDeg = n->GetInDeg();
-        for(int i  = 0; i < inDeg; i++){
-            int eId = m_Graph->GetInEId(i, n);
-            inEdges.push_back(m_Egdes.find(eId).second);
-        }
-        return inEdges;
-    }
-
-    std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u) {
-        Node n = *u;
-        std::vector<Edge> outEdges;
-        int outDeg = n->GetOutDeg();
-        for(int i  = 0; i < outDeg; i++){
-            int eId = m_Graph->GetOutEId(i, n);
-            outEdges.push_back(m_Egdes.find(eId).second);
-        }
-        return outEdges;
-        
-    }
+//    std::vector<Edge> GetInEdges(std::shared_ptr<Node> u) {
+//        Node n = *u;
+//        std::vector<Edge> inEdges;
+//        int inDeg = n->GetInDeg();
+//        for(int i  = 0; i < inDeg; i++){
+//            int eId = m_Graph->GetInEId(i, n);
+//            inEdges.push_back(m_Egdes.find(eId).second);
+//        }
+//        return inEdges;
+//    }
+//
+//    std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u) {
+//        Node n = *u;
+//        std::vector<Edge> outEdges;
+//        int outDeg = n->GetOutDeg();
+//        for(int i  = 0; i < outDeg; i++){
+//            int eId = m_Graph->GetOutEId(i, n);
+//            outEdges.push_back(m_Egdes.find(eId).second);
+//        }
+//        return outEdges;
+//
+//    }
 
 private:
     PNEGraph m_Graph;

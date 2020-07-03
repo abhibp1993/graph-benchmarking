@@ -16,18 +16,20 @@ PYBIND11_MODULE(iglsynthcpp, m) {
         .def(py::init<>())
         ;
 
-    py::class_<Node>(m, "Node")
+    py::class_<Node, std::shared_ptr<Node>>(m, "Node")
         .def(py::init<int, std::string&>())
+        .def("__repr__", &Node::getName)
         ;
 
     py::class_<Edge>(m, "Edge")
         .def(py::init<int, std::shared_ptr<Node>&, std::shared_ptr<Node>&>())
+        .def("__repr__", &Edge::getName)
         ;
 
     py::class_<SnapGraph, GraphBase>(m, "SnapGraph")
         .def(py::init<>())
         .def("AddNode", &SnapGraph::AddNode)
-        // .def("AddEdge", &SnapGraph::AddEdge)
+        .def("AddEdge", &SnapGraph::AddEdge)
         // .def("GetInEdges", &SnapGraph::GetInEdges)
         ;
 
