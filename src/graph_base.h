@@ -20,6 +20,8 @@ public:
     Node(int id, std::string& name):
         m_Id(id), m_Name(name) {}
 
+    int getNId(){return m_Id;}
+
 protected:
 //    std::shared_ptr<GraphBase> m_Graph;
     int m_Id;
@@ -31,6 +33,7 @@ class Edge {
 public:
     Edge(int id, std::shared_ptr<Node>& p_source, std::shared_ptr<Node>& p_target):
         m_Id(id), m_Source(p_source), m_Target(p_target) {}
+
 
 protected:
 //    std::shared_ptr<GraphBase> m_Graph;
@@ -45,7 +48,7 @@ public:
     GraphBase() {}
 
     Node AddNode(std::string name);
-    Edge AddEdge(std::string name, std::int SrcNId, std::int TgtNId);
+    Edge AddEdge(std::string name, std::string srcName, std::string tgtName);
     std::vector<Edge> GetInEdges(std::shared_ptr<Node> u);
     std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u);
 };
