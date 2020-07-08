@@ -50,27 +50,25 @@ public:
     std::vector<Edge> GetInEdges(std::shared_ptr<Node> u) {
         Node n = *u;
         int nId = n.getNId();
-        Node n_snap = m_Graph->GetNode(nId)
         std::vector<Edge> inEdges;
 
-
-        //compile error here
-
-        int inDeg = (m_Graph->GetNode(nId))->GetInDeg();
+        int inDeg = m_Graph->GetNI(nId).GetInDeg();
         for(int i  = 0; i < inDeg; i++){
-            int eId = m_Graph->GetInEId(i, n);
-            inEdges.push_back(m_Egdes.find(eId).second);
+            int eId = m_Graph->GetNI(nId).GetInEId(i);
+            inEdges.push_back(m_Edges[eId]);
         }
         return inEdges;
     }
 
     std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u) {
         Node n = *u;
+        int nId = n.getNId();
         std::vector<Edge> outEdges;
-        int outDeg = n->GetOutDeg();
+
+        int outDeg = m_Graph->GetNI(nId).GetOutDeg();
         for(int i  = 0; i < outDeg; i++){
-            int eId = m_Graph->GetOutEId(i, n);
-            outEdges.push_back(m_Egdes.find(eId).second);
+            int eId = m_Graph->GetNI(nId).GetOutEId(i);
+            outEdges.push_back(m_Edges[eId]);
         }
         return outEdges;
 
