@@ -21,7 +21,8 @@ public:
         m_Id(id), m_Name(name) {}
 
     int getNId(){return m_Id;}
-    std::string getName(){return "Node(" + m_Name + ")"; }
+    std::string toString(){return "Node(" + m_Name + ")"; }
+    std::string getName() {return m_Name; }
 
 protected:
 //    std::shared_ptr<GraphBase> m_Graph;

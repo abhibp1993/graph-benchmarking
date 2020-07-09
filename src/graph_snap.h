@@ -48,8 +48,16 @@ public:
 
 
     std::vector<Edge> GetInEdges(std::shared_ptr<Node> u) {
-        Node n = *u;
-        int nId = n.getNId();
+
+        // Note that incoming object Node is an IGLSynth Node object and not a SNAP Node object
+        // (Snap calls nodes as TNode)
+        // This is bound to generate segmentation fault, as you are making incorrect pointer access.
+
+        // Node n = *u;
+        // int nId = n.getNId();
+
+        std::string uName = u->getName();
+        int nId = m_NodesId[uName];
         std::vector<Edge> inEdges;
 
         int inDeg = m_Graph->GetNI(nId).GetInDeg();
@@ -60,17 +68,17 @@ public:
         return inEdges;
     }
 
-    std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u) {
-        Node n = *u;
-        int nId = n.getNId();
-        std::vector<Edge> outEdges;
-
-        int outDeg = m_Graph->GetNI(nId).GetOutDeg();
-        for(int i  = 0; i < outDeg; i++){
-            int eId = m_Graph->GetNI(nId).GetOutEId(i);
-            outEdges.push_back(m_Edges[eId]);
-        }
-        return outEdges;
+//    std::vector<Edge> GetOutEdges(std::shared_ptr<Node> u) {
+//        Node n = *u;
+//        int nId = n.getNId();
+//        std::vector<Edge> outEdges;
+//
+//        int outDeg = m_Graph->GetNI(nId).GetOutDeg();
+//        for(int i  = 0; i < outDeg; i++){
+//            int eId = m_Graph->GetNI(nId).GetOutEId(i);
+//            outEdges.push_back(m_Edges[eId]);
+//        }
+//        return outEdges;
 
 
 
