@@ -30,7 +30,8 @@ PYBIND11_MODULE(iglsynthcpp, m) {
         .def(py::init<>())
         .def("AddNode", &SnapGraph::AddNode)
         .def("AddEdge", &SnapGraph::AddEdge)
-        // .def("GetInEdges", &SnapGraph::GetInEdges)
+        .def("GetInEdges", &SnapGraph::GetInEdges)
+        .def("GetOutEdges", &SnapGraph::GetOutEdges)
         ;
 
     py::class_<LemonGraph>(m, "LemonGraph")
