@@ -10,9 +10,10 @@ e2 = g.AddEdge("e2", n1, n3)
 e3 = g.AddEdge("e3", n1, n4)
 
 
+
 print(g)
 print(n1)
 print(n2)
 print(e1)
-print(n1.GetInEdges())
-print(n1.GetOutEdges())
+print(g.GetInEdges(n1))
+print(g.GetOutEdges(n1))
